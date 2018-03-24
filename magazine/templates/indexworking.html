@@ -1,0 +1,99 @@
+{% extends "base_original.html" %} {% load staticfiles %} {% block content %}
+<!-- <img src="{% static "magazine/images/comm_crop.jpeg" %}" class = "header-image img-responsive" alt="Main Image" > -->
+<div class="container">
+    <h1 class="header">MOST POPULAR</h1>
+     {% for section, article in sections.items %}{% if forloop.counter0|divisibleby:3 %}
+        {% endif%}
+        {% if forloop.counter0 < 3 %}
+        <div class="col-md-6">
+            <a href="./{{section}}"><h2 class="subheader">{{section|upper}}</h2></a>
+            <a href="{{ article.get_absolute_url }}" class="no-decoration">
+                <h4 class="subheader-article-name"> {{article.title}}</h4> </a>
+            {% for author in article.contributors.all %}
+            <a href="{{ author.get_absolute_url }}" class="no-decoration">
+                <h3 class="subheader-article-author"> {{ author.name }} </h3> </a>
+            {% empty %}
+            <h3 class="subheader-article-author"> No Author </h3> {% endfor %} {% if section == "art" %}
+            <figure class="resize-image" style="margin:auto;">
+                <!--pass in art image link HERE-->
+                <img src="magazine/static/magazine/images/files/10.png" class="img-responsive" alt="Main Image">
+            </figure>
+            {% else %}
+            <p class="article-summary"> THIS IS A TWO LINE SUMMARY. THIS IS A TWO LINE SUMMARY. THIS IS A TWO LINE SUMMARY
+                <h4> <a href="{{ article.get_absolute_url }}" class="read-more">Read More</a></h4>
+            </p>
+            {% endif %}
+        </div>
+        {% endif %}
+    {% if forloop.counter|divisibleby:3 %}
+    </div>
+    {% endif %} {% endfor %}
+    <div class="row">
+    <h1 class="header">CURRENT ISSUE: <a href="{{issue.get_absolute_url}}"> {{issue}} </a></h1> {% for section, article in sections.items %} {% if forloop.counter0|divisibleby:2 %}
+    <div class="row">
+        {% endif %}
+        <div class="col-md-6">
+            <a href="./{{section}}"><h2 class="subheader">{{section|upper}}</h2></a>
+            <a href="{{ article.get_absolute_url }}" class="no-decoration">
+                <h4 class="subheader-article-name"> {{article.title}}</h4> </a>
+            {% for author in article.contributors.all %}
+            <a href="{{ author.get_absolute_url }}" class="no-decoration">
+                <h3 class="subheader-article-author"> {{ author.name }} </h3> </a>
+            {% empty %}
+            <h3 class="subheader-article-author"> No Author </h3> {% endfor %} {% if section == "art" %}
+            <figure class="resize-image" style="margin:auto;">
+                <!--pass in art image link HERE-->
+                <img src="{{ MEDIA_URL }}{{article.image.photo|safe}}" class="img-responsive" alt="Main Image">
+            </figure>
+            {% else %}
+            <p class="article-summary"> {{article.teaser|safe}}
+                <h4> <a href="{{ article.get_absolute_url }}" class="read-more">Read More</a></h4>
+            </p>
+            {% endif %}
+        </div>
+        {% if forloop.counter|divisibleby:2 %}
+    </div>
+    {% endif %} {% endfor %}
+    <div class="row">
+    </div>
+    <h1 class="header">FROM THE BLOG</h1>
+     {% for title, post in blog.items %}
+        <div class="col-md-4">
+            <a href="{{ post.get_absolute_url }}" class="no-decoration">
+                <h4 class="subheader-article-name"> {{post.title}}</h4> </a>
+            {% if post.authors.all %} {% for author in post.authors.all %} {% if forloop.first %}{% else %} {% if forloop.last %} and {% else %}<span style="margin-left:-5px;">,</span>{% endif %} {% endif %}
+            <a href="{{ post.get_absolute_url }}" class="no-decoration">
+                <h3 class="subheader-article-author"> {{ author }} </h3> </a>
+            {% endfor %} {% else %}
+            <br> {% endif %}
+            <!-- How to check if image exists:
+            http://stackoverflow.com/questions/6637168/python-django-templates-and-testing-if-a-variable-is-null-or-empty-string?rq=1
+            http://stackoverflow.com/questions/12507281/determine-empty-template-variable-in-django -->
+            {% if post.first_image_id %}
+            <figure class="resize-image" style="margin:auto;">
+                <a href="{{post.get_absolute_url}}"><img class='img-responsive' src="{{post.first_image.path}}"></a>
+            </figure>
+            <br> {% endif %}
+            <p class="article-summary"> If you listen to their tracks on Spotify, lyrics aside, the Mountain Goats (historically) sound almost exactly like a mixture of those names on the “related artists” list; Neutral Milk Hotel, The Thermals, The Magnetic Fields, Okkervil River, etc. Their sound is cohesive, the music comforting in a way NMH or Beirut are, and not to get personal but they were all I listened to freshman year during my first big depressive episode.</p>
+            <p><a class="read-more" href="{{post.get_absolute_url}}">Read More</a></p>
+            {% if forloop.first == 1 %}
+            {% endif %}
+        </div>
+        {% endfor %}
+    <div class="row">
+    </div>
+    <h1 class="header">MORE ISSUES</h1>
+    <div class="row">
+        {% if ads %} {% for ad in ads %}
+        <div class="col-md-4">
+            <article>
+                <a href="/advertise" class="sponsored-link"> Sponsored </a>
+                <figure class="resize-image" style="margin:auto;">
+                    <!--pass in art image link HERE-->
+                    <a href="{{ ad.url }}"> <img src=" {{ ad.image.url }}" class="img-responsive" alt="Main Image"> </a>
+                </figure>
+        </div>
+        {% endfor %} {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -46,14 +46,24 @@ def index(request):
         data['sections'][SectionName].append(article)
   data['sections']['art'] =  Image.objects.published().filter(issue=issue)
 
+  all_issues = Issue.objects.all()
+  season = {'Winter': 0, 'Spring': 1, 'Commencement': 2, 'Fall': 3}
+
+  #all_issues_sorted = reversed(sorted(all_issues, key=lambda i: i.year))
+  all_issues_sorted = reversed(sorted(all_issues, key=lambda i: i.year * 10 + season[i.issue]))
+
+  data['issues'] = all_issues_sorted
+
   # Randomly choice an article for every section
   for key in data['sections']:
     if data['sections'][key]:
-      data['sections'][key]= random.choice(data['sections'][key])
+      data['sections'][key]= random.choice(data['sections'][key]) 
   posts = Post.objects.all()
-  recent_blog = list(reversed(sorted(posts, key=lambda i: i.created)))[:2 ]
+  recent_blog = list(reversed(sorted(posts, key=lambda i: i.created)))[:3 ]
   data['blog']['post1'] = recent_blog[0]
   data['blog']['post2'] = recent_blog[1]
+  data['blog']['post3'] = recent_blog[2]
+
 
   data['toplist'] = [{'title' : "article one", 'url' : "google.com", 'author' : "samantha"}, {'title' : "article two", 'url' : "google.com", 'author' : "cameron"}, {'title' : "article three", 'url' : "google.com", 'author' : "joe"}]
 
@@ -116,6 +126,8 @@ def issues(request):
   }
   template_name = 'issues.html'
   return render_to_response(template_name, data, context_instance=RequestContext(request))
+
+
 
 def masthead(request):
   template_name = 'about_us.html'

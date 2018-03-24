@@ -22,6 +22,23 @@ body {
 	font-family: 'futura_std';
 	src: url('../fonts/FuturaStd-Book.otf');
 }
+
+
+
+
+.main {
+    margin-left: 140px; /* Same width as the sidebar + left position in px */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+    .sidenavright {padding-top: 15px;}
+    .sidenavright a {font-size: 18px;}
+}
+
 a {
     color: black;
 }
@@ -137,6 +154,14 @@ body{
 	   padding: 15px;
 
 	}
+
+	.sidenav {
+    display: none;
+    }
+
+.sidenavright {
+    display: none;
+}
 }
 .affix + .container {
     padding-top:50px
@@ -353,6 +378,36 @@ body{
 	   display: inline-block;
 	   padding: 15px;
 	}
+	.ads {
+	display: none;
+	}
+
+	/*how to make a sidebar https://www.w3schools.com/howto/howto_css_fixed_sidebar.asp*/
+	.sidenav {
+	display: all;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 140px;
+    left: 0px;
+    background: transparent;
+    overflow-x: hidden;
+    padding: 0px 0;
+    
+	}
+
+	.sidenavright {
+		display: all;
+	    width: 200px;
+	    position: fixed;
+	    z-index: 1;
+	    top: 140px;
+	    right: 0px;
+	    background: transparent;
+	    overflow-x: hidden;
+	    padding: 0px 0;
+
+	}
 }
 
 /* Articles */
@@ -428,6 +483,7 @@ article.poetry p {
 	font-size: 22px;
 	padding: 15px;
 	border-bottom: 1px solid #000;
+	text-align: left;
 }
 .subheader{
   color: #000;
@@ -437,6 +493,12 @@ article.poetry p {
 	font-size: 18px;
 	padding-left: 50px;
 }
+
+.black { color: black; }
+
+.grey { color: #778899;}
+
+.border { border: double; }
 
 .central-message{
   font-size: 19px;
@@ -450,14 +512,57 @@ article.poetry p {
 	font-size: 16px;
 
 }
+.subheader-article-name{
+	font-family: futura;
+	text-align: left;
+	font-size: 18px;
+	padding: 0px;
+}
+
+.subheader-article-name-most{
+	font-family: futura;
+	text-align: left;
+	font-size: 18px;
+	padding: 0px;
+	text-decoration: underline;
+}
+
 .subheader-article-author{
-	font-family: Times;
-	text-align: center;
-	font-style: italic;
-	margin-top: 0px;
-	font-size: 14px;
+	font-family: futura;
+	text-align: right;
+	font-size: 18px;
+	font-color: grey;
 
 }
+
+.subheader-article-name-blog{
+	font-family: futura;
+	text-align: center;
+	font-size: 18px;
+}
+
+.subheader-article-name-blog-home{
+	font-family: futura;
+	text-align: left;
+	font-size: 18px;
+	padding-bottom: 0px;
+}
+
+.subheader-article-author-blog{
+	font-family: futura;
+	text-align: center;
+	font-size: 18px;
+	color: #778899;
+}
+
+.subheader-article-author-blog-home{
+	font-family: futura;
+	text-align: left;
+	font-size: 15px;
+	color: #778899;
+	padding-top: 0px;
+}
+
 .section-article{
   text-align: center;
 
@@ -479,7 +584,25 @@ article.poetry p {
 	font-family: Times;
 	font-size: 14px;
   font-size: .9rem;
+  margin-top: 5px;
+   overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
+
+.article-summary-first{
+	font-family: Times;
+	font-size: 14px;
+  font-size: .9rem;
+  margin-top: 5px;
+   overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+}
+
+
 .left-border{
 	border-left: 1px solid #000;
     position: absolute;
@@ -681,6 +804,13 @@ h3 .xbutton {
 		overflow-x: hidden;
 		width: 100%;
 	}
+	.sidenav {
+    display: none;
+    }
+
+    .sidenavright {
+    display: none;
+    }
 	.decade {
 	  display: table;
 	  width: 99.2%;
@@ -719,6 +849,8 @@ h3 .xbutton {
 	h3 .xbutton {
 		font-size: 50px;
 	}
+
+	
 }
 
 /* BACKGROUND TRANSITIONS */

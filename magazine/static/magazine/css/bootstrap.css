@@ -1,3 +1,4 @@
+
 /*!
  * Bootstrap v3.0.0
  *
@@ -24,6 +25,36 @@ section,
 summary {
   display: block;
 }
+
+
+/* The code for this is losely based on http://jsfiddle.net/jonigiuro/4jwHF/*/
+.h-content {
+    width: 100%;
+    overflow-x: scroll;
+}
+
+.hider {
+    width: 2600px;
+    height: 260px;
+    overflow-x: scroll;
+    
+}
+
+.hider span {
+    display: block;
+    float: left;
+    padding: 5px;
+    width: 200px;
+    height: 200px;
+    border-right: none;
+    font-size: 12px;
+}
+
+.hider span:hover {
+    cursor: pointer;
+}
+
+
 
 audio,
 canvas,
@@ -509,8 +540,8 @@ h3 {
 h4,
 h5,
 h6 {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 h1,
@@ -848,6 +879,10 @@ pre code {
 .col-md-10,
 .col-md-11,
 .col-md-12,
+.col-md-13,
+.col-md-100,
+.col-md-99,
+.col-md-112
 .col-lg-1,
 .col-lg-2,
 .col-lg-3,
@@ -1096,8 +1131,13 @@ pre code {
   .col-md-8,
   .col-md-9,
   .col-md-10,
-  .col-md-11 {
+  .col-md-11,
+  .col-md-112 {
     float: left;
+  }
+
+  .col-md-100 {
+    float: right;
   }
   .col-md-1 {
     width: 8.333333333333332%;
@@ -1108,13 +1148,17 @@ pre code {
   .col-md-3 {
     width: 25%;
   }
+  .col-md-112 {
+    width: 10%;
+  }
   .col-md-4 {
     width: 33.33333333333333%;
   }
   .col-md-5 {
     width: 41.66666666666667%;
   }
-  .col-md-6 {
+  .col-md-6,
+  .col-md-100 {
     width: 50%;
   }
   .col-md-7 {
@@ -1134,7 +1178,14 @@ pre code {
   }
   .col-md-12 {
     width: 100%;
+
   }
+
+  .col-md-99 {
+    width: 50%;
+    float: right;
+  }
+
   .col-md-push-0 {
     left: auto;
   }
@@ -1410,7 +1461,7 @@ pre code {
 
 table {
   max-width: 100%;
-  background-color: transparent;
+  backound-color: transparent;
 }
 
 th {

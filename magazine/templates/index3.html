@@ -1,0 +1,31 @@
+{% extends "base_original.html" %} {% load staticfiles %} {% block content %}
+<!-- <img src="{% static "magazine/images/comm_crop.jpeg" %}" class = "header-image img-responsive" alt="Main Image" > -->
+<div class="container">
+    <h1 class="header">MOST POPULAR</h1>
+    {% for section, article in sections.items %}{% if forloop.counter0|divisibleby:3 %}
+        <div class="row">
+        {% endif%}
+        <div class="col-md-6">
+            <a href="./{{section}}"><h2 class="subheader">{{section|upper}}</h2></a>
+            <a href="{{ article.get_absolute_url }}" class="no-decoration">
+                <h4 class="subheader-article-name"> {{article.title}}</h4> </a>
+            {% for author in article.contributors.all %}
+            <a href="{{ author.get_absolute_url }}" class="no-decoration">
+                <h3 class="subheader-article-author"> {{ author.name }} </h3> </a>
+            {% empty %}
+            <h3 class="subheader-article-author"> No Author </h3> {% endfor %} {% if section == "art" %}
+            <figure class="resize-image" style="margin:auto;">
+                <!--pass in art image link HERE-->
+                <img src="{{ MEDIA_URL }}{{article.image.photo|safe}}" class="img-responsive" alt="Main Image">
+            </figure>
+            {% else %}
+            <p class="article-summary"> THIS IS A TWO LINE SUMMARY. THIS IS A TWO LINE SUMMARY. THIS IS A TWO LINE SUMMARY
+                <h4> <a href="{{ article.get_absolute_url }}" class="read-more">Read More</a></h4>
+            </p>
+            {% endif %}
+        </div>
+    {% if forloop.counter|divisibleby:3 %}
+    </div>
+    {% endif %} {% endfor %}
+</div>
+{% endblock %}
